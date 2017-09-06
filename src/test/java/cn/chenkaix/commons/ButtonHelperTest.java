@@ -1,4 +1,4 @@
-package cn.chenkaix.common;
+package cn.chenkaix.commons;
 
 /**
  * @ClassName: ButtonHelper

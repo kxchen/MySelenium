@@ -1,4 +1,10 @@
-package cn.chenkaix.common;
+package cn.chenkaix.commons.helper;
+
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+
+import cn.chenkaix.commons.WebDriverFactory;
 
 /**
  * @ClassName: BrowserHelper
@@ -9,6 +15,7 @@ package cn.chenkaix.common;
  * 
  */
 public class BrowserHelper {
+	private static final Logger log = Logger.getLogger(BrowserHelper.class);
 
 	/**
 	 * @Title: start
@@ -18,34 +25,30 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void start(String Browser) {
-		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
+		log.info("启动浏览器");
+		WebDriverFactory.getMyDriverInst().start(Browser);
 	}
 
 	/**
 	 * @Title: stop
-	 * @Description: 关闭所有该WebTest实例浏览器，且停止WebTest实例。
+	 * @Description: 关闭所有该WebDriver实例浏览器，且停止WebDriver实例。
 	 * @param:
 	 * @return: void
 	 * @throws:
 	 */
 	public static void stop() {
-
+		WebDriverFactory.getMyDriverInst().stop();
 	}
 
 	/**
 	 * @Title: close
-	 * @Description: 关闭该WebTest实例当前的浏览器，不停止WebTest实例。
+	 * @Description: 当前页面
 	 * @param:
 	 * @return: void
 	 * @throws:
 	 */
 	public static void close() {
-
+		WebDriverFactory.getMyDriverInst().close();
 	}
 
 	/**
@@ -56,7 +59,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void windowMaximize() {
-
+		WebDriverFactory.getMyDriverInst().windowMaximize();
 	}
 
 	/**
@@ -66,7 +69,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static String getPageSource() {
-		return null;
+		return WebDriverFactory.getMyDriverInst().getBodyText();
 	}
 
 	/**
@@ -78,7 +81,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void open(String baseUrl) {
-
+		WebDriverFactory.getMyDriverInst().open(baseUrl);
 	}
 
 	/**
@@ -90,7 +93,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void selectWindow(String windowTitle) {
-
+		WebDriverFactory.getMyDriverInst().selectWindow(windowTitle);
 	}
 
 	/**
@@ -100,7 +103,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void goBack() {
-
+		WebDriverFactory.getMyDriverInst().goBack();
 	}
 
 	/**
@@ -110,7 +113,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void refresh() {
-
+		WebDriverFactory.getMyDriverInst().refresh();
 	}
 
 	/**
@@ -120,7 +123,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void getLocation() {
-
+		WebDriverFactory.getMyDriverInst().getLocation();
 	}
 
 	/**
@@ -130,7 +133,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void getTitle() {
-
+		WebDriverFactory.getMyDriverInst().getTitle();
 	}
 
 	/**
@@ -143,7 +146,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static String executeScript(String express) {
-		return null;
+		return WebDriverFactory.getMyDriverInst().getEval(express);
 	}
 
 	/**
@@ -153,6 +156,19 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static String getBrowserWindHandle() {
-		return null;
+		return WebDriverFactory.getMyDriverInst().getBrowserWinHandle();
 	}
+
+	public static void highlight(String locator) {
+		WebDriverFactory.getMyDriverInst().highlight(locator);
+	}
+
+	public static String getWindowHandler() {
+		return WebDriverFactory.getMyDriverInst().getWindowHandler();
+	}
+
+	public static Set<String> getWindowHandlers() {
+		return WebDriverFactory.getMyDriverInst().getWindowHandlers();
+	}
+
 }

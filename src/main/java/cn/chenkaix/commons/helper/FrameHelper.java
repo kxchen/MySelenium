@@ -1,4 +1,4 @@
-package cn.chenkaix.common;
+package cn.chenkaix.commons.helper;
 
 /**
  * @ClassName: FrameHelper
@@ -8,6 +8,6 @@ package cn.chenkaix.common;
  * @bolg: https://kxchen.github.io
  * 
  */
-public class FrameHelperTest {
+public class FrameHelper {
 
 }
