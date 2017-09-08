@@ -239,7 +239,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void type(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
+		findElement(paramString1).sendKeys(new CharSequence[] { paramString2 });
 
 	}
 
@@ -306,7 +306,25 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void selectFrame(String paramString) {
-		// TODO Auto-generated method stub
+		if (paramString.startsWith("index=")) {
+			WebDriverFactory.getDriverInst().switchTo()
+					.frame(Integer.parseInt(paramString.substring("index=".length())));
+
+			return;
+		}
+		if (paramString.startsWith("//")) {
+			WebDriverFactory.getDriverInst().switchTo()
+					.frame(WebDriverFactory.getDriverInst().findElement(By.xpath(paramString)));
+
+			return;
+		}
+		if (paramString.startsWith("xpath=")) {
+			WebDriverFactory.getDriverInst().switchTo().frame(
+					WebDriverFactory.getDriverInst().findElement(By.xpath(paramString.substring("xpath=".length()))));
+
+			return;
+		}
+		WebDriverFactory.getDriverInst().switchTo().frame(paramString);
 
 	}
 
@@ -635,7 +653,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void defaultContent() {
-		// TODO Auto-generated method stub
+		WebDriverFactory.getDriverInst().switchTo().defaultContent();
 
 	}
 
@@ -665,7 +683,8 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void downloadFile(String paramString1, String paramString2, String paramString3) {
-		// TODO Auto-generated method stub
+		// WebDriverFactory.getDriverInst().downloadFile(paramString1,
+		// paramString2, paramString3);
 
 	}
 

@@ -1,5 +1,7 @@
 package cn.chenkaix.commons.helper;
 
+import cn.chenkaix.commons.WebDriverFactory;
+
 /**
  * @ClassName: DownloadHelper
  * @Description: TODO
@@ -9,5 +11,9 @@ package cn.chenkaix.commons.helper;
  * 
  */
 public class DownloadHelper {
-
+	//我用的这个版本的selenium没有实现，有空在写
+	public static void downloadFile(String href, String path, String file) {
+		//
+		WebDriverFactory.getMyDriverInst().downloadFile(href, path, file);
+	}
 }
