@@ -19,15 +19,13 @@ public class FrameHelper {
 	 *            frame的标识 默认为id或name：例1. selectFrame("top")
 	 *            xpath=xpathExpress：例2. //iframe[@name='top']
 	 *            xpath=//iframe[@name='top']index=indexValue：例3.index=0
-	 * 
-	 * 			@return： void
-	 * @throws:
 	 */
 	public static void selectFrame(String locator) {
 		int count = Constants.COUNT;
 		while (count > 0)
 			try {
 				WebDriverFactory.getMyDriverInst().selectFrame(locator);
+				count = 0;
 			} catch (Exception e) {
 				--count;
 				SleepHelper.sleep(Constants.INTERVAL);

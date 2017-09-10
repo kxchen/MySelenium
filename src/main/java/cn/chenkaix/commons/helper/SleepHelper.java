@@ -40,6 +40,7 @@ public class SleepHelper {
 		while (count > 0)
 			try {
 				WebDriverFactory.getMyDriverInst().isElementPresent(locator);
+				count = 0;
 			} catch (Exception e) {
 				--count;
 				sleep(interval);

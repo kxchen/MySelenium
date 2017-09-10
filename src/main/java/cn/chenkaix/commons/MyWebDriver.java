@@ -1,13 +1,17 @@
 package cn.chenkaix.commons;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 
 import cn.chenkaix.util.ReadProperties;
 
@@ -79,17 +83,38 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void click(String paramString) {
-		WebDriverFactory.getDriverInst().close();
+		findElement(paramString).click();
 
 	}
 
 	public void jsClick(String paramString) {
-		// TODO Auto-generated method stub
-
+		WebElement target = findElement(paramString);
+		((JavascriptExecutor) WebDriverFactory.getDriverInst()).executeScript("arguments[0].click();",
+				new Object[] { target });
 	}
 
-	public void doScroll(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
+	public void doScroll(String paramString, String paramString2) {
+		WebElement scroll = findElement(paramString);
+		WebElement target = findElement(paramString2);
+		((JavascriptExecutor) WebDriverFactory.getDriverInst()).executeScript("arguments[0].scrollLeft = 0;",
+				new Object[] { scroll });
+
+		((JavascriptExecutor) WebDriverFactory.getDriverInst()).executeScript("arguments[0].scrollTop = 0;",
+				new Object[] { scroll });
+
+		if (target.getLocation().x > scroll.getLocation().x + scroll.getSize().width) {
+			int scrollX = target.getLocation().x - scroll.getLocation().x
+					+ (target.getSize().width - scroll.getSize().width) / 2;
+			((JavascriptExecutor) WebDriverFactory.getDriverInst())
+					.executeScript("arguments[0].scrollLeft = " + scrollX + ";", new Object[] { scroll });
+		}
+
+		if (target.getLocation().y > scroll.getLocation().y + scroll.getSize().height) {
+			int scrollY = target.getLocation().y - scroll.getLocation().y
+					+ (target.getSize().height - scroll.getSize().height) / 2;
+			((JavascriptExecutor) WebDriverFactory.getDriverInst())
+					.executeScript("arguments[0].scrollTop = " + scrollY + ";", new Object[] { scroll });
+		}
 
 	}
 
@@ -124,57 +149,58 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void keyPress(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
-
+		new Actions(WebDriverFactory.getDriverInst())
+				.sendKeys(findElement(paramString1), new CharSequence[] { Keys.valueOf(paramString2) }).perform();
 	}
 
 	public void shiftKeyDown() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyDown(Keys.SHIFT).perform();
 
 	}
 
 	public void shiftKeyUp() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyUp(Keys.SHIFT).perform();
 
 	}
 
 	public void metaKeyDown() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyDown(Keys.META).perform();
 
 	}
 
 	public void metaKeyUp() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyUp(Keys.META).perform();
 
 	}
 
 	public void altKeyDown() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyDown(Keys.ALT).perform();
 
 	}
 
 	public void altKeyUp() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyUp(Keys.ALT).perform();
 
 	}
 
 	public void controlKeyDown() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyDown(Keys.CONTROL).perform();
 
 	}
 
 	public void controlKeyUp() {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyUp(Keys.CONTROL).perform();
 
 	}
 
 	public void keyDown(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
-
+		new Actions(WebDriverFactory.getDriverInst()).keyDown(findElement(paramString1), Keys.valueOf(paramString2))
+				.perform();
 	}
 
 	public void keyUp(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).keyUp(findElement(paramString1), Keys.valueOf(paramString2))
+				.perform();
 
 	}
 
@@ -249,32 +275,59 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void check(String paramString) {
-		// TODO Auto-generated method stub
-
+		WebElement checkElement = findElement(paramString);
+		if (!(checkElement.isSelected()))
+			checkElement.click();
 	}
 
 	public void uncheck(String paramString) {
-		// TODO Auto-generated method stub
-
+		WebElement checkElement = findElement(paramString);
+		if (checkElement.isSelected())
+			checkElement.click();
 	}
 
 	public void select(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
+		Select selectElement = new Select(findElement(paramString1));
+		if (paramString2.startsWith("value=")) {
+			selectElement.selectByValue(paramString2.substring("value=".length()));
+		} else if (paramString2.startsWith("index=")) {
+			selectElement.selectByIndex(Integer.parseInt(paramString2.substring("index=".length())));
+		} else if (paramString2.startsWith("label=")) {
+			selectElement.selectByVisibleText(paramString2.substring("label=".length()));
+		} else
+			selectElement.selectByVisibleText(paramString2);
 
 	}
 
 	public void addSelection(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
+		Select selectElement = new Select(findElement(paramString1));
+		if (paramString2.startsWith("value=")) {
+			selectElement.selectByValue(paramString2.substring("value=".length()));
+		} else if (paramString2.startsWith("index=")) {
+			selectElement.selectByIndex(Integer.parseInt(paramString2.substring("index=".length())));
+		} else if (paramString2.startsWith("label=")) {
+			selectElement.selectByVisibleText(paramString2.substring("label=".length()));
+		} else
+			selectElement.selectByVisibleText(paramString2);
 
 	}
 
 	public void removeSelection(String paramString1, String paramString2) {
-		// TODO Auto-generated method stub
+		Select selectElement = new Select(findElement(paramString1));
+		if (paramString2.startsWith("value=")) {
+			selectElement.deselectByValue(paramString2.substring("value=".length()));
+		} else if (paramString2.startsWith("index=")) {
+			selectElement.deselectByIndex(Integer.parseInt(paramString2.substring("index=".length())));
+		} else if (paramString2.startsWith("label=")) {
+			selectElement.deselectByVisibleText(paramString2.substring("label=".length()));
+		} else
+			selectElement.deselectByVisibleText(paramString2);
 
 	}
 
 	public void removeAllSelections(String paramString) {
-		// TODO Auto-generated method stub
+		Select selectElement = new Select(findElement(paramString));
+		selectElement.deselectAll();
 
 	}
 
@@ -404,13 +457,11 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public String getValue(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		return findElement(paramString).getAttribute("value");
 	}
 
 	public String getText(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		return findElement(paramString).getText();
 	}
 
 	public void highlight(String paramString) {
@@ -433,8 +484,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public boolean isChecked(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		return findElement(paramString).isSelected();
 	}
 
 	public String getTable(String paramString) {
@@ -443,13 +493,22 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public String[] getSelectedLabels(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		Select select = new Select(findElement(paramString));
+
+		List listSelected = select.getAllSelectedOptions();
+		if ((listSelected == null) || (listSelected.size() <= 0)) {
+			return new String[0];
+		}
+		String[] selectLables = new String[listSelected.size()];
+		for (int i = 0; i < listSelected.size(); ++i) {
+			selectLables[i] = ((WebElement) listSelected.get(i)).getText();
+		}
+		return selectLables;
 	}
 
 	public String getSelectedLabel(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		Select select = new Select(findElement(paramString));
+		return select.getFirstSelectedOption().getText();
 	}
 
 	public String[] getSelectedValues(String paramString) {
@@ -483,38 +542,64 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public boolean isSomethingSelected(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		Select select = new Select(findElement(paramString));
+		List listSelected = select.getAllSelectedOptions();
+
+		return ((listSelected != null) && (listSelected.size() > 0));
 	}
 
 	public String[] getSelectOptions(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		Select select = new Select(findElement(paramString));
+
+		List listOptions = select.getOptions();
+		if ((listOptions == null) || (listOptions.size() <= 0)) {
+			return new String[0];
+		}
+		String[] lables = new String[listOptions.size()];
+		for (int i = 0; i < listOptions.size(); ++i) {
+			lables[i] = ((WebElement) listOptions.get(i)).getText();
+		}
+		return lables;
 	}
 
 	public String getAttribute(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		int atIndex = paramString.lastIndexOf("@");
+		String locator = paramString.substring(0, atIndex);
+		if (locator.endsWith("/")) {
+			locator = locator.substring(0, locator.length() - 1);
+		}
+		String attribute = paramString.substring(atIndex + 1);
+		return findElement(locator).getAttribute(attribute);
 	}
 
 	public boolean isTextPresent(String paramString) {
-		// TODO Auto-generated method stub
+		String Xpath = "//*[contains(text(),'" + paramString + "')]";
+		try {
+			WebDriverFactory.getDriverInst().findElement(By.xpath(Xpath));
+			return true;
+		} catch (Exception e) {
+			log.error(e.toString());
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public boolean isElementPresent(String paramString) {
-		// TODO Auto-generated method stub
+		try {
+			return (findElement(paramString) != null);
+		} catch (Exception e) {
+			log.error(e.toString());
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	public boolean isVisible(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		return findElement(paramString).isDisplayed();
 	}
 
 	public boolean isEditable(String paramString) {
-		// TODO Auto-generated method stub
-		return false;
+		return findElement(paramString).isEnabled();
 	}
 
 	public void windowFocus() {
@@ -548,28 +633,28 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public Number getElementPositionLeft(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		return Integer.valueOf(findElement(paramString).getLocation().getX());
 	}
 
 	public Number getElementPositionTop(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		return Integer.valueOf(findElement(paramString).getLocation().getY());
 	}
 
 	public Number getElementWidth(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		return Integer.valueOf(findElement(paramString).getSize().getWidth());
 	}
 
 	public Number getElementHeight(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		return Integer.valueOf(findElement(paramString).getSize().getHeight());
 	}
 
 	public Number getXpathCount(String paramString) {
-		// TODO Auto-generated method stub
-		return null;
+		if (paramString.startsWith("xpath=")) {
+			return Integer.valueOf(WebDriverFactory.getDriverInst()
+					.findElements(By.xpath(paramString.substring("xpath=".length()))).size());
+		}
+
+		return Integer.valueOf(WebDriverFactory.getDriverInst().findElements(By.xpath(paramString)).size());
 	}
 
 	public void setTimeout(String paramString) {
@@ -648,7 +733,8 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void keyPressNative(String paramString) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).sendKeys(new CharSequence[] { Keys.valueOf(paramString) })
+				.perform();
 
 	}
 
@@ -658,7 +744,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void clear(String paramString) {
-		// TODO Auto-generated method stub
+		findElement(paramString).clear();
 
 	}
 

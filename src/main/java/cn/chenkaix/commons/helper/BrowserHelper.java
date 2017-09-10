@@ -19,10 +19,8 @@ public class BrowserHelper {
 
 	/**
 	 * @Title: start
-	 * @Description: TODO
+	 * @Description: 启动浏览器
 	 * @param Browser;目前支持：firefox、chrome、ie
-	 * 			@return： void
-	 * @throws:
 	 */
 	public static void start(String Browser) {
 		log.info("启动浏览器");
@@ -32,9 +30,6 @@ public class BrowserHelper {
 	/**
 	 * @Title: stop
 	 * @Description: 关闭所有该WebDriver实例浏览器，且停止WebDriver实例。
-	 * @param:
-	 * @return: void
-	 * @throws:
 	 */
 	public static void stop() {
 		WebDriverFactory.getMyDriverInst().stop();
@@ -43,9 +38,6 @@ public class BrowserHelper {
 	/**
 	 * @Title: close
 	 * @Description: 当前页面
-	 * @param:
-	 * @return: void
-	 * @throws:
 	 */
 	public static void close() {
 		WebDriverFactory.getMyDriverInst().close();
@@ -54,9 +46,6 @@ public class BrowserHelper {
 	/**
 	 * @Title: windowMaximize
 	 * @Description: 浏览器窗口最大化
-	 * @param:
-	 * @return: void
-	 * @throws:
 	 */
 	public static void windowMaximize() {
 		WebDriverFactory.getMyDriverInst().windowMaximize();
@@ -66,7 +55,6 @@ public class BrowserHelper {
 	 * @Title: getPageSource
 	 * @Description: 获取当前页面所在frame的源码
 	 * @return: String
-	 * @throws:
 	 */
 	public static String getPageSource() {
 		return WebDriverFactory.getMyDriverInst().getBodyText();
@@ -81,6 +69,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void open(String baseUrl) {
+		log.info("打开网址：" + baseUrl);
 		WebDriverFactory.getMyDriverInst().open(baseUrl);
 	}
 

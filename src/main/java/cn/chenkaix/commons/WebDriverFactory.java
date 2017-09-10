@@ -16,8 +16,8 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
  */
 public class WebDriverFactory {
 	private static final Logger log = Logger.getLogger(WebDriverFactory.class);
-	private static WebDriver driverInst = null;
-	private static MyWebDriver myDriverInst = null;
+	private static WebDriver driverInst;
+	private static MyWebDriver myDriverInst = new MyWebDriver();
 
 	/**
 	 * @Title: getMyDriverInst
@@ -61,9 +61,6 @@ public class WebDriverFactory {
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
 		driverInst = new FirefoxDriver();
-		if (myDriverInst != null)
-			log.warn("实例已经存在：" + myDriverInst.toString());
-		myDriverInst = new MyWebDriver();
 		return driverInst;
 	}
 
@@ -72,9 +69,6 @@ public class WebDriverFactory {
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
 		driverInst = new ChromeDriver();
-		if (myDriverInst != null)
-			log.warn("实例已经存在：" + myDriverInst.toString());
-		myDriverInst = new MyWebDriver();
 		return driverInst;
 	}
 
@@ -83,9 +77,6 @@ public class WebDriverFactory {
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
 		driverInst = new InternetExplorerDriver();
-		if (myDriverInst != null)
-			log.warn("实例已经存在：" + myDriverInst.toString());
-		myDriverInst = new MyWebDriver();
 		return driverInst;
 	}
 }
