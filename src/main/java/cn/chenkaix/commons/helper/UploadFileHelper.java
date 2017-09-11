@@ -4,7 +4,7 @@ import cn.chenkaix.commons.WebDriverFactory;
 
 /**
  * @ClassName: UploadFileHelper
- * @Description: TODO
+ * @Description: 上传文件帮助类
  * @author: 15255391553@163.com
  * @date: 2017年9月7日 下午11:28:39
  * @bolg: https://kxchen.github.io

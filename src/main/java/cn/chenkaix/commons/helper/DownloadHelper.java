@@ -11,7 +11,7 @@ import cn.chenkaix.commons.WebDriverFactory;
  * 
  */
 public class DownloadHelper {
-	//我用的这个版本的selenium没有实现，有空在写
+	// 这个版本的selenium没有实现，有空在写
 	public static void downloadFile(String href, String path, String file) {
 		//
 		WebDriverFactory.getMyDriverInst().downloadFile(href, path, file);

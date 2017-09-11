@@ -205,17 +205,17 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void mouseOver(String paramString) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).moveToElement(findElement(paramString)).perform();
 
 	}
 
 	public void mouseOut(String paramString) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).moveToElement(findElement(paramString), -10, -10).perform();
 
 	}
 
 	public void mouseDown(String paramString) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).clickAndHold(findElement(paramString)).perform();
 
 	}
 
@@ -235,7 +235,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void mouseUp(String paramString) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).release(findElement(paramString)).perform();
 
 	}
 
@@ -255,7 +255,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void mouseMove(String paramString) {
-		// TODO Auto-generated method stub
+		new Actions(WebDriverFactory.getDriverInst()).moveToElement(findElement(paramString)).perform();
 
 	}
 
@@ -382,17 +382,18 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void chooseCancelOnNextConfirmation() {
-		// TODO Auto-generated method stub
+		WebDriverFactory.getDriverInst().switchTo().alert().dismiss();
 
 	}
 
 	public void chooseOkOnNextConfirmation() {
-		// TODO Auto-generated method stub
+		WebDriverFactory.getDriverInst().switchTo().alert().accept();
 
 	}
 
 	public void answerOnNextPrompt(String paramString) {
-		// TODO Auto-generated method stub
+		WebDriverFactory.getDriverInst().switchTo().alert().sendKeys(paramString);
+		WebDriverFactory.getDriverInst().switchTo().alert().accept();
 
 	}
 
@@ -407,38 +408,39 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void close() {
-		// TODO Auto-generated method stub
-
+		WebDriverFactory.getDriverInst().switchTo().defaultContent().close();
 	}
 
 	public boolean isAlertPresent() {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean isPresent = Boolean.valueOf(true);
+		try {
+			WebDriverFactory.getDriverInst().switchTo().alert();
+		} catch (Exception e) {
+			isPresent = Boolean.valueOf(false);
+		}
+		return isPresent.booleanValue();
 	}
 
 	public boolean isPromptPresent() {
-		// TODO Auto-generated method stub
-		return false;
+		return isAlertPresent();
 	}
 
 	public boolean isConfirmationPresent() {
-		// TODO Auto-generated method stub
-		return false;
+		return isAlertPresent();
 	}
 
 	public String getAlert() {
-		// TODO Auto-generated method stub
-		return null;
+		String alertText = WebDriverFactory.getDriverInst().switchTo().alert().getText();
+		WebDriverFactory.getDriverInst().switchTo().alert().accept();
+		return alertText;
 	}
 
 	public String getConfirmation() {
-		// TODO Auto-generated method stub
-		return null;
+		return WebDriverFactory.getDriverInst().switchTo().alert().getText();
 	}
 
 	public String getPrompt() {
-		// TODO Auto-generated method stub
-		return null;
+		return WebDriverFactory.getDriverInst().switchTo().alert().getText();
 	}
 
 	public String getLocation() {

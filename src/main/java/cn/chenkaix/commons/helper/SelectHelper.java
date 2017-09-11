@@ -5,7 +5,7 @@ import cn.chenkaix.util.Constants;
 
 /**
  * @ClassName: SelectHelper
- * @Description: TODO
+ * @Description: Select类型操作帮助类
  * @author: 15255391553@163.com
  * @date: 2017年9月9日 上午12:19:23
  * @bolg: https://kxchen.github.io
