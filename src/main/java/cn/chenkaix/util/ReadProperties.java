@@ -48,8 +48,7 @@ public class ReadProperties {
 
 	/**
 	 * @Title: readBrowserConfig
-	 * @Description: 读取浏览器配置文件 @return： void
-	 * @throws:
+	 * @Description: 读取浏览器配置文件
 	 */
 	@SuppressWarnings("all")
 	private static void readBrowserConfig() {

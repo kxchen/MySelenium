@@ -52,22 +52,11 @@ public class MyWebDriver implements IMyWebDriver {
 	public void start(String Browser) {
 		try {
 			if (Browser.equalsIgnoreCase("firefox")) {
-				log.info(ReadProperties.getFIREFOX_DRIVER_PATH());
-				System.setProperty("webdriver.gecko.driver", ReadProperties.getFIREFOX_DRIVER_PATH());
-				log.info(ReadProperties.getFIREROX_APP_PATH());
-				System.setProperty("webdriver.firefox.bin", ReadProperties.getFIREROX_APP_PATH());
 				webDriver.getFirefoxDriverInst();
 			} else if (Browser.equalsIgnoreCase("chrome")) {
-				log.info(ReadProperties.getCHROME_DRIVER_PATH());
-				System.setProperty("webdriver.chrome.driver", ReadProperties.getFIREFOX_DRIVER_PATH());
-				log.info(ReadProperties.getCHROME_APP_PATH());
 				System.setProperty("webdriver.chrome.bin", ReadProperties.getFIREROX_APP_PATH());
 				webDriver.getChromeDriverInst();
 			} else {
-				log.info(ReadProperties.getIE_DRIVER_PATH());
-				System.setProperty("webdriver.chrome.driver", ReadProperties.getIE_DRIVER_PATH());
-				log.info(ReadProperties.getIE_APP_PATH());
-				System.setProperty("webdriver.chrome.bin", ReadProperties.getIE_APP_PATH());
 				webDriver.getInternetExplorerDriverInst();
 			}
 		} catch (Exception e) {
