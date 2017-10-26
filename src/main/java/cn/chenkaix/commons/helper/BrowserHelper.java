@@ -20,7 +20,7 @@ public class BrowserHelper {
 	/**
 	 * @Title: start
 	 * @Description: 启动浏览器
-	 * @param Browser;目前支持：firefox、chrome、ie
+	 * @param : Browser目前支持：firefox、chrome、ie
 	 */
 	public static void start(String Browser) {
 		log.info("启动浏览器");

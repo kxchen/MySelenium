@@ -84,8 +84,9 @@ public class WebDriverFactory {
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
 		log.info(ReadProperties.getCHROME_DRIVER_PATH());
-		System.setProperty("webdriver.chrome.driver", ReadProperties.getFIREFOX_DRIVER_PATH());
+		System.setProperty("webdriver.chrome.driver", ReadProperties.getCHROME_DRIVER_PATH());
 		log.info(ReadProperties.getCHROME_APP_PATH());
+		System.setProperty("webdriver.chrome.bin", ReadProperties.getCHROME_APP_PATH());
 		driverInst = new ChromeDriver();
 		return driverInst;
 	}
@@ -95,9 +96,9 @@ public class WebDriverFactory {
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
 		log.info(ReadProperties.getIE_DRIVER_PATH());
-		System.setProperty("webdriver.chrome.driver", ReadProperties.getIE_DRIVER_PATH());
+		System.setProperty("webdriver.ie.driver", ReadProperties.getIE_DRIVER_PATH());
 		log.info(ReadProperties.getIE_APP_PATH());
-		System.setProperty("webdriver.chrome.bin", ReadProperties.getIE_APP_PATH());
+		System.setProperty("webdriver.ie.bin", ReadProperties.getIE_APP_PATH());
 		driverInst = new InternetExplorerDriver();
 		return driverInst;
 	}

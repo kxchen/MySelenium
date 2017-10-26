@@ -54,7 +54,6 @@ public class MyWebDriver implements IMyWebDriver {
 			if (Browser.equalsIgnoreCase("firefox")) {
 				webDriver.getFirefoxDriverInst();
 			} else if (Browser.equalsIgnoreCase("chrome")) {
-				System.setProperty("webdriver.chrome.bin", ReadProperties.getFIREROX_APP_PATH());
 				webDriver.getChromeDriverInst();
 			} else {
 				webDriver.getInternetExplorerDriverInst();
