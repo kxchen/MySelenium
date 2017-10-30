@@ -3,7 +3,6 @@
 > 公司使用java版selenuim做webui自动化，在使用过程中发现有许多的操作非常繁琐，所以利用下班休息时间根据自己的想法简单的进行了一次二次封装。我也是初出茅庐，可能有些地方写的不是很合理，在以后的工作中会不断地对其进行完善。
 
 <!-- more -->
-
 ## Myselenium概述
 
 
@@ -79,23 +78,22 @@ WebDriverFactory.setDriverInst(driverInst);
 ```
 ## 方法详解
 
-#### [AssertHelper 断言帮助类](http://note.youdao.com/)
+#### [AssertHelper 断言帮助类](#)
 
-#### [BrowserHelper 浏览器的操作帮助类 ](http://note.youdao.com/)
+#### [BrowserHelper 浏览器的操作帮助类 ](#)
 
-#### [FrameHelper Frame元素的帮助类 ](http://note.youdao.com/)
+#### [FrameHelper Frame元素的帮助类 ](#)
 
-#### [InputHelper Input的类型的操作公共类。](http://note.youdao.com/) 
+#### [InputHelper Input的类型的操作公共类。](#) 
 
-#### [KeyBoardHelper 键盘输入操作帮助类 ](http://note.youdao.com/)
+#### [KeyBoardHelper 键盘输入操作帮助类 ](#)
 
-#### [MouseHelper 鼠标操作帮助类 ](http://note.youdao.com/)
+#### [MouseHelper 鼠标操作帮助类 ](#)
 
-#### [PopUpHelper 提示，警告，输入的弹出对话框操作帮助类 ](http://note.youdao.com/)
+#### [PopUpHelper 提示，警告，输入的弹出对话框操作帮助类 ](#)
 
-#### [SelectHelper Select类型操作帮助类 ](http://note.youdao.com/)
+#### [SelectHelper Select类型操作帮助类 ](#)
 
-#### [SleepHelper 时间等待帮助类 ](http://note.youdao.com/)
+#### [SleepHelper 时间等待帮助类 ](#)
 
-#### [UploadFileHelper 上传文件帮助类 ](http://note.youdao.com/)
-
+#### [UploadFileHelper 上传文件帮助类 ](#)
