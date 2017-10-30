@@ -23,7 +23,7 @@ public class WebDriverFactory {
 
 	/**
 	 * @Title: setDriverInst
-	 * @Description: 设置webDriverInst
+	 * @Description: 设置webDriverInst。自定义启动浏览器。把得到的driverInst传给WebDriverFactory,供全局使用。
 	 * @param driverInst
 	 */
 	public static void setDriverInst(WebDriver driverInst) {
@@ -40,7 +40,7 @@ public class WebDriverFactory {
 		if (myDriverInst == null) {
 			log.error("没有初始化实例:myDriverInst=null");
 		} else {
-			log.info("当前实例:" + myDriverInst.toString());
+			log.debug("当前实例:" + myDriverInst.toString());
 		}
 		return myDriverInst;
 	}
@@ -55,7 +55,7 @@ public class WebDriverFactory {
 		if (driverInst == null) {
 			log.error("没有初始化实例:driverInst=null");
 		} else {
-			log.info("当前实例:" + driverInst.toString());
+			log.debug("当前实例:" + driverInst.toString());
 		}
 		return driverInst;
 	}
@@ -68,36 +68,36 @@ public class WebDriverFactory {
 	 * @throws:
 	 */
 	public WebDriver getFirefoxDriverInst() {
-		log.info("初始化FirefoxDriverInst");
+		log.debug("初始化FirefoxDriverInst");
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
-		log.info(ReadProperties.getFIREFOX_DRIVER_PATH());
+		log.debug("浏览器驱动地址:"+ReadProperties.getFIREFOX_DRIVER_PATH());
 		System.setProperty("webdriver.gecko.driver", ReadProperties.getFIREFOX_DRIVER_PATH());
-		log.info(ReadProperties.getFIREROX_APP_PATH());
+		log.debug("浏览器安装地址:"+ReadProperties.getFIREROX_APP_PATH());
 		System.setProperty("webdriver.firefox.bin", ReadProperties.getFIREROX_APP_PATH());
 		driverInst = new FirefoxDriver();
 		return driverInst;
 	}
 
 	public WebDriver getChromeDriverInst() {
-		log.info("初始化ChromeDriverInst");
+		log.debug("初始化ChromeDriverInst");
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
-		log.info(ReadProperties.getCHROME_DRIVER_PATH());
+		log.debug("浏览器驱动地址:"+ReadProperties.getCHROME_DRIVER_PATH());
 		System.setProperty("webdriver.chrome.driver", ReadProperties.getCHROME_DRIVER_PATH());
-		log.info(ReadProperties.getCHROME_APP_PATH());
+		log.debug("浏览器安装地址:"+ReadProperties.getCHROME_APP_PATH());
 		System.setProperty("webdriver.chrome.bin", ReadProperties.getCHROME_APP_PATH());
 		driverInst = new ChromeDriver();
 		return driverInst;
 	}
 
 	public WebDriver getInternetExplorerDriverInst() {
-		log.info("初始化InternetExplorerDriverInst");
+		log.debug("初始化InternetExplorerDriverInst");
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
-		log.info(ReadProperties.getIE_DRIVER_PATH());
+		log.debug("浏览器驱动地址:"+ReadProperties.getIE_DRIVER_PATH());
 		System.setProperty("webdriver.ie.driver", ReadProperties.getIE_DRIVER_PATH());
-		log.info(ReadProperties.getIE_APP_PATH());
+		log.debug("浏览器安装地址:"+ReadProperties.getIE_APP_PATH());
 		System.setProperty("webdriver.ie.bin", ReadProperties.getIE_APP_PATH());
 		driverInst = new InternetExplorerDriver();
 		return driverInst;

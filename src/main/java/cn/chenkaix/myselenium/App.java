@@ -1,4 +1,4 @@
-package cn.chenkaix.mySelenium;
+package cn.chenkaix.myselenium;
 
 /**
  * Hello world!

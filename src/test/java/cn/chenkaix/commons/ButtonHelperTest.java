@@ -1,5 +1,7 @@
 package cn.chenkaix.commons;
 
+import org.testng.Assert;
+
 /**
  * @ClassName: ButtonHelper
  * @Description: TODO
@@ -9,5 +11,7 @@ package cn.chenkaix.commons;
  * 
  */
 public class ButtonHelperTest {
-	
+	public static void main(String[] args) {
+		//Assert.assertEquals(actual, expected, message);
+	}
 }

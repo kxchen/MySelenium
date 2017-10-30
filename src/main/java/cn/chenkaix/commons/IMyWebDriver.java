@@ -3,9 +3,6 @@ package cn.chenkaix.commons;
 import java.util.Set;
 
 public abstract interface IMyWebDriver {
-//	public abstract void setExtensionJs(String paramString);
-//
-//	public abstract void initWebTestInstInfo(WebTestInstInfo paramWebTestInstInfo);
 
 	public abstract void start();
 

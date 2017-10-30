@@ -1,5 +1,7 @@
 package cn.chenkaix.commons.helper;
 
+import org.apache.log4j.Logger;
+
 import cn.chenkaix.commons.WebDriverFactory;
 
 /**
@@ -11,6 +13,8 @@ import cn.chenkaix.commons.WebDriverFactory;
  * 
  */
 public class SleepHelper {
+	private static final Logger log = Logger.getLogger(SleepHelper.class);
+
 	/**
 	 * @Title: sleep
 	 * @Description:等待固定时间
@@ -22,6 +26,9 @@ public class SleepHelper {
 		try {
 			Thread.sleep(interval);
 		} catch (Exception e) {
+			log.error("Thread.sleep()出错");
+			;
+			e.printStackTrace();
 		}
 	}
 
@@ -43,6 +50,7 @@ public class SleepHelper {
 				count = 0;
 			} catch (Exception e) {
 				--count;
+				log.debug("没有等待到元素：" + locator + "再等待" + interval + "次");
 				sleep(interval);
 				if (count == 0)
 					WebDriverFactory.getMyDriverInst().isElementPresent(locator);

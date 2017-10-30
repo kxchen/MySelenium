@@ -40,10 +40,9 @@ public class ReadProperties {
 	}
 
 	static {
-		log.info("开始初始化配置文件");
+		log.debug("开始初始化配置文件");
 		readBrowserConfig();
-
-		log.info("初始化配置文件结束");
+		log.debug("初始化配置文件结束");
 	}
 
 	/**
@@ -52,7 +51,7 @@ public class ReadProperties {
 	 */
 	@SuppressWarnings("all")
 	private static void readBrowserConfig() {
-		log.info("开始读取浏览器信息");
+		log.debug("开始读取浏览器信息");
 		// PropertyResourceBundle使用属性文件中的静态字符串集合来管理语言环境资源。
 		try {
 			PropertyResourceBundle prb = (PropertyResourceBundle) PropertyResourceBundle.getBundle(BROWSER);
@@ -78,7 +77,7 @@ public class ReadProperties {
 			e.printStackTrace();
 			log.error(e.toString());
 		}
-		log.info("读取浏览器信息结束");
+		log.debug("读取浏览器信息结束");
 	}
 
 }

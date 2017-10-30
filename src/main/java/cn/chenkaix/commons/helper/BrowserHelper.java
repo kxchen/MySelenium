@@ -23,7 +23,7 @@ public class BrowserHelper {
 	 * @param : Browser目前支持：firefox、chrome、ie
 	 */
 	public static void start(String Browser) {
-		log.info("启动浏览器");
+		log.debug("启动浏览器");
 		WebDriverFactory.getMyDriverInst().start(Browser);
 	}
 
@@ -69,7 +69,7 @@ public class BrowserHelper {
 	 * @throws:
 	 */
 	public static void open(String baseUrl) {
-		log.info("打开网址：" + baseUrl);
+		log.debug("打开网址：" + baseUrl);
 		WebDriverFactory.getMyDriverInst().open(baseUrl);
 	}
 

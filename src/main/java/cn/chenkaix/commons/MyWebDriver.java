@@ -13,8 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
-import cn.chenkaix.util.ReadProperties;
-
 public class MyWebDriver implements IMyWebDriver {
 	private WebDriverFactory webDriver = new WebDriverFactory();
 	private static final Logger log = Logger.getLogger(MyWebDriver.class);
@@ -45,8 +43,7 @@ public class MyWebDriver implements IMyWebDriver {
 	}
 
 	public void start() {
-		webDriver.getFirefoxDriverInst();
-
+		log.info("启动浏览器");
 	}
 
 	public void start(String Browser) {
