@@ -49,6 +49,7 @@
 		</dependency>
 	</dependencies>
 
+
 	<build>
 		<finalName>myselenium</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
