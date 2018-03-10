@@ -1,10 +1,10 @@
 package cn.chenkaix.commons.helper;
 
-import org.testng.Assert;
-
+import cn.chenkaix.assertion.Assert;
 import cn.chenkaix.assertion.Result;
 import cn.chenkaix.assertion.ResultAccumulator;
 import cn.chenkaix.assertion.Validate;
+import cn.chenkaix.util.Constants;
 import cn.chenkaix.util.MyUtils;
 
 /**
@@ -26,12 +26,31 @@ public class AssertHelper extends Assert {
 	 * 			@return： void
 	 * @throws:
 	 */
+
 	public static void assertString(String expeced, String actual) {
-		Validate.assertEquals(MyUtils.getLineInfo(), expeced, actual);
+		if (Constants.VALIDATE.equals("true"))
+			Validate.assertEquals(MyUtils.getLineInfo(), expeced, actual);
+		else
+			Assert.assertEquals(MyUtils.getLineInfo(), expeced, actual);
 	}
 
 	public static void assertString(String locator, String expeced, String actual) {
-		Validate.assertEquals("locator:" + locator + MyUtils.getLineInfo(), expeced, actual);
+		if (Constants.VALIDATE.equals("true"))
+			Validate.assertEquals("locator:" + locator + MyUtils.getLineInfo(), expeced, actual);
+		else
+			Assert.assertEquals("locator:" + locator + MyUtils.getLineInfo(), expeced, actual);
+	}
+
+	public static boolean isEmptyString(String s) {
+		return s == null || s.toUpperCase().equals("NULL") || s.trim().equals("");
+	}
+
+	public static void sqlArrayEqual(String[] subTest, String[] subArray) {
+		if (Constants.VALIDATE.equals("true"))
+			Validate.assertArrayEquals(subTest, subArray);
+
+		else
+			Assert.assertArrayEquals(subTest, subArray);
 	}
 
 	public static String getAssertLog() {

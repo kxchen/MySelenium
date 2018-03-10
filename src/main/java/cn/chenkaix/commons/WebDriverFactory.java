@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import cn.chenkaix.util.ReadProperties;
+import cn.chenkaix.util.Constants;
 
 /**
  * @ClassName: WebDriverFactory
@@ -71,10 +71,10 @@ public class WebDriverFactory {
 		log.debug("初始化FirefoxDriverInst");
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
-		log.debug("浏览器驱动地址:"+ReadProperties.getFIREFOX_DRIVER_PATH());
-		System.setProperty("webdriver.gecko.driver", ReadProperties.getFIREFOX_DRIVER_PATH());
-		log.debug("浏览器安装地址:"+ReadProperties.getFIREROX_APP_PATH());
-		System.setProperty("webdriver.firefox.bin", ReadProperties.getFIREROX_APP_PATH());
+		log.debug("浏览器驱动地址:" + Constants.FIREFOX_DRIVER_PATH);
+		System.setProperty("webdriver.gecko.driver", Constants.FIREFOX_DRIVER_PATH);
+		log.debug("浏览器安装地址:" + Constants.FIREROX_APP_PATH);
+		System.setProperty("webdriver.firefox.bin", Constants.FIREROX_APP_PATH);
 		driverInst = new FirefoxDriver();
 		return driverInst;
 	}
@@ -83,10 +83,10 @@ public class WebDriverFactory {
 		log.debug("初始化ChromeDriverInst");
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
-		log.debug("浏览器驱动地址:"+ReadProperties.getCHROME_DRIVER_PATH());
-		System.setProperty("webdriver.chrome.driver", ReadProperties.getCHROME_DRIVER_PATH());
-		log.debug("浏览器安装地址:"+ReadProperties.getCHROME_APP_PATH());
-		System.setProperty("webdriver.chrome.bin", ReadProperties.getCHROME_APP_PATH());
+		log.debug("浏览器驱动地址:" + Constants.CHROME_DRIVER_PATH);
+		System.setProperty("webdriver.chrome.driver", Constants.CHROME_DRIVER_PATH);
+		log.debug("浏览器安装地址:" + Constants.CHROME_APP_PATH);
+		System.setProperty("webdriver.chrome.bin", Constants.CHROME_APP_PATH);
 		driverInst = new ChromeDriver();
 		return driverInst;
 	}
@@ -95,10 +95,10 @@ public class WebDriverFactory {
 		log.debug("初始化InternetExplorerDriverInst");
 		if (driverInst != null)
 			log.warn("实例已经存在：" + driverInst.toString());
-		log.debug("浏览器驱动地址:"+ReadProperties.getIE_DRIVER_PATH());
-		System.setProperty("webdriver.ie.driver", ReadProperties.getIE_DRIVER_PATH());
-		log.debug("浏览器安装地址:"+ReadProperties.getIE_APP_PATH());
-		System.setProperty("webdriver.ie.bin", ReadProperties.getIE_APP_PATH());
+		log.debug("浏览器驱动地址:" + Constants.IE_DRIVER_PATH);
+		System.setProperty("webdriver.ie.driver", Constants.IE_DRIVER_PATH);
+		log.debug("浏览器安装地址:" + Constants.IE_APP_PATH);
+		System.setProperty("webdriver.ie.bin", Constants.IE_APP_PATH);
 		driverInst = new InternetExplorerDriver();
 		return driverInst;
 	}

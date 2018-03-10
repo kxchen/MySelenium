@@ -2,181 +2,133 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>cn.chenkaix.myselenium</groupId>
-	<artifactId>myselenium</artifactId>
-	<version>1.0.0</version>
+	<groupId>cn.chenkaix.MySelenium</groupId>
+	<artifactId>my-selenium</artifactId>
+	<version>0.5</version>
 	<packaging>jar</packaging>
 
-	<name>MySelenium</name>
-	<url>http://chenkaix.cn</url>
+	<name>my-selenium</name>
+	<url>http://my-selenium.chenkaix.cn</url>
+
+	<!-- 依赖关系版本信息 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<junit-version>4.12</junit-version>
-		<selenium-version>3.4.0</selenium-version>
-		<log4j-version>1.2.17</log4j-version>
-		<testng-version>6.9.10</testng-version>
+		<ojdbc.version>12.1.0.1-atlassian-hosted</ojdbc.version>
+		<mysql.version>6.0.5</mysql.version>
+		<spring.version>4.3.5.RELEASE</spring.version>
+		<java.version>1.8</java.version>
+		<selenium.version>3.4.0</selenium.version>
+		<log4j.version>1.2.17</log4j.version>
+		<testng.version>6.9.8</testng.version>
+		<reportng.version>1.1.4</reportng.version>
+		<guice.version>3.0</guice.version>
 	</properties>
-
+	
+	<!-- 项目依赖关系 -->
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit-version}</version>
-			<scope>test</scope>
-		</dependency>
-
+	
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>${selenium-version}</version>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
+			<version>${log4j.version}</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>${testng-version}</version>
-			<scope>test</scope>
+			<version>${testng.version}</version>
 		</dependency>
+
+		<!-- reportNg的依赖包 关联testNg ，这个包的主要作用就是对testng原生报告的美化 -->
+		<dependency>
+			<groupId>org.uncommons</groupId>
+			<artifactId>reportng</artifactId>
+			<version>${reportng.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.testng</groupId>
+					<artifactId>testng</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.inject</groupId>
+			<artifactId>guice</artifactId>
+			<version>${guice.version}</version>
+		</dependency>
+
+		<!-- oracle数据库驱动 -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>${ojdbc.version}</version>
+		</dependency>
+		
+		<!-- mysql数据库驱动 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		
 	</dependencies>
-
-
+	
+	<!-- 编译配置 -->
 	<build>
-		<finalName>myselenium</finalName>
-		<sourceDirectory>src/main/java</sourceDirectory>
+		<finalName>my-selenium</finalName>
 		<resources>
-			<!-- 控制资源文件的拷贝 -->
 			<resource>
 				<directory>src/main/resources</directory>
-				<targetPath>${project.build.directory}</targetPath>
-				<!-- excludes和includes二选一使用即可 -->
-				<!-- 不包含的文件，支持通配符 -->
-				<excludes>
-					<exclude>*.txt</exclude>
-					<exclude>*.log</exclude>
-				</excludes>
-				<!-- 包含的文件，支持通配符 -->
 				<includes>
-					<include>*.properties</include>
+					<include>**/*.*</include>
 				</includes>
+				<filtering>false</filtering><!--这里是false，用true会报 数据库连接 错误 -->
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.class</include>
+					<include>**/*.tld</include>
+				</includes>
+				<filtering>false</filtering>
 			</resource>
 		</resources>
+
 		<plugins>
-			<!-- 设置源文件编码方式 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<defaultLibBundleDir>lib</defaultLibBundleDir>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-
-			<!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>cn.chenkaix.myselenium.App</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-			<!-- 拷贝依赖的jar包到lib目录 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.8</version>
-				<executions>
-					<execution>
-						<id>copy</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>
-								${project.build.directory}/lib
-							</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- 解决资源文件的编码问题 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>2.6</version>
 				<configuration>
 					<encoding>UTF-8</encoding>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-			<!-- 打包source文件为jar文件(源码，可选) -->
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<attach>true</attach>
-					<encoding>UTF-8</encoding>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!--生成doc jar包 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<attach>true</attach>
-					<encoding>UTF-8</encoding>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.12.4</version>
-				<configuration>
-					<skipTests>true</skipTests>
-				</configuration>
-			</plugin>
-
-
 		</plugins>
-
 	</build>
 
 </project>
