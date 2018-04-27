@@ -2,9 +2,6 @@ package cn.chenkaix.assertion;
 
 import java.util.Iterator;
 
-import org.testng.internal.junit.ExactComparisonCriteria;
-import org.testng.internal.junit.InexactComparisonCriteria;
-
 public class Validate {
 	public static void assertSame(Object expected, Object actual) {
 		if (expected != actual) {

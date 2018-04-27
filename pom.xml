@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<ojdbc.version>12.1.0.1-atlassian-hosted</ojdbc.version>
 		<mysql.version>6.0.5</mysql.version>
-		<spring.version>4.3.5.RELEASE</spring.version>
+		<spring.version>4.3.8.RELEASE</spring.version>
 		<java.version>1.8</java.version>
 		<selenium.version>3.4.0</selenium.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -23,10 +23,10 @@
 		<reportng.version>1.1.4</reportng.version>
 		<guice.version>3.0</guice.version>
 	</properties>
-	
+
 	<!-- 项目依赖关系 -->
 	<dependencies>
-	
+
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -50,6 +50,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 
@@ -86,16 +92,17 @@
 			<artifactId>ojdbc6</artifactId>
 			<version>${ojdbc.version}</version>
 		</dependency>
-		
+
 		<!-- mysql数据库驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
-		
+
 	</dependencies>
-	
+
+
 	<!-- 编译配置 -->
 	<build>
 		<finalName>my-selenium</finalName>
